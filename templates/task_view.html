@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="banner">
+                <div class="banner-text">
+                    <h1>AVODHA CLASS</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4> Add Task</h4>
+            <form method="post" class="p-3 shadow">
+  {% csrf_token %}
+  <div class="mb-3">
+  <input type="text" class="form-control" name="name" placeholder="name of the user"><br>
+  </div>
+  <div class="mb-3">
+  <input type="text" class="form-control" name="post" placeholder="post"><br>
+  </div>
+  <div class="mb-3">
+  <input type="date" class="form-control" name="datetime" placeholder="date"><br>
+  </div>
+
+  <input type="submit" class="btn btn-success">
+</form>
+
+        </div>
+        <div class="col-md-6">
+            <h4>Task Completed</h4>
+            {% for i in obj1 %}
+            <div class="shadow card">
+            <div class="card-body">
+                <h5 class="card-title">{{i.name}}</h5>
+                <p><b>{{i.post}}</b></p>
+                <h6>{{i.datetime}}</h6>
+
+                <a class="btn btn-danger" href="{% url 'delete' i.id %}">Done</a>
+                <a class="btn btn-success" href="{% url 'update' i.id %}">Update</a>
+
+            </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
